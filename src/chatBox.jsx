@@ -1,0 +1,324 @@
+import React, {useState} from "react";
+
+
+function chatBox() {
+
+    const [brandName, setBrandName] = useState("BrandName");
+    const [subtitle, setSubtitle] =useState("Typically replies in a day");
+    const [headercolor, setHeadercolor] = useState("#FBFFC8");
+    const [colorScheme, setColorScheme] = useState("Dark");
+    const [url, setUrl] = useState("https://uploads-ssl.webflow.com/5f68a65cd5188c058e27c898/6204c4267b92625c9770f687_whatsapp-chat-widget-dummy-logo.png");
+    const [message, setMessage]= useState("Hi there! How can I help you?");
+    const [text, setText]= useState("start Chat");
+    const [btnColor, setBtnColor] = useState("#1A1A1A");
+    const [btnColorScheme, setBtnColorScheme] = useState("light");
+    const [radius, setRadius] = useState("40");
+    
+
+    const [brandNameChange, setBrandNameChange] = useState(brandName);
+    const [subtitleChange, setSubtitleChange] = useState(subtitle);
+    const [headercolorChange, setHeadercolorChange] = useState(headercolor);    
+    const [colorSchemeChange, setColorSchemeChange] = useState(colorScheme);
+    const [urlChange, setUrlChange] = useState(url);
+    const [messageChange, setMessageChange] = useState(message);
+    const [textChange, setTextChange] = useState(text);
+    const [btnColorChange, setBtnColorChange] = useState(btnColor);
+    const [btnColorSchemeChange, setBtnColorSchemeChange] = useState(btnColorScheme);
+    const [radiusChange , setRadiusChange] = useState(radius);
+    const [CodeShow, setCodeShow] = useState(false);
+
+    const handleButtonClick = () =>{
+        setBrandNameChange(brandName);
+        setSubtitleChange(subtitle);
+        setHeadercolorChange(headercolor);
+        setColorSchemeChange(colorScheme);
+        setUrlChange(url);
+        setMessageChange(message);
+        setTextChange(text);
+        setBtnColorChange(btnColor);
+        setBtnColorSchemeChange(btnColorScheme);
+        setRadiusChange(radius);
+
+        setCodeShow(true);
+    }
+
+    const copyToClipboard = () => {
+        const codeText = `<script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
+    <script>
+        var wa_widgetSetting = {
+            "title": "${brandNameChange}",
+            "subtitle": "${subtitleChange}",
+            "headerBackgroundColor": "${headercolorChange}",
+            "headerColorScheme": "${colorSchemeChange}",
+            "greetingText": "${messageChange}",
+            "ctaText": "${textChange}",
+            "btnColor": "${btnColorChange}",
+            "cornerRadius": "${radiusChange}",
+            "welcomeMessage": "Hello",
+            "btnColorScheme": "${btnColorSchemeChange}",
+            "brandImage": "${urlChange}",
+            "darkHeaderColorScheme": {"title": "#333333", "subTitle": "#4F4F4F"}
+        };
+        window.onload = () => {
+            _waEmbed(wa_btnSetting, wa_widgetSetting);
+        };
+    </script>`;
+    
+        navigator.clipboard.writeText(codeText)
+            .then(() => alert("Code copied to clipboard! ✅"))
+            .catch((err) => console.error("Failed to copy:", err));
+    };
+    
+
+    return(
+        <>
+            {/* WhatsApp Button Preview */}
+            <h1 className="my-[25px] text-[#000] text-[20px] font-bold font-sf-pro box-border text-left">
+                Chat Widget Preview
+            </h1>
+
+            {/* main Box */}
+            <div className="w-[350px] bg-[#fff] shadow-2xl rounded-[8px] box-border font-sf-pro text-[#222525] text-[16px] font-[500] leading-[24px]">
+                {/* chatBox */}
+                <div style={{backgroundColor : headercolor}} className="flex p-[20px] rounded-tl-lg rounded-tr-lg">
+                    <div className="box-border block  font-sf-pro">
+                        <img className="h-[32px] w-[32px] rounded-full mr-[12px] box-border max-w-full inline-block " src={url} alt="" />
+                    </div>
+                    <div className="box-border block  font-sf-pro"> 
+                        <h4 
+                        style={{ color: colorScheme === "Dark" ? "#000" : "#fff" }} 
+                        className="text-[#333333] font-[600] text-[16px] box-border mb-[12px] block">{brandName}</h4>
+                        <p
+                        style={{ color: colorScheme === "Dark" ? "#000" : "#fff" }}
+                        className="text-[#4F4F4F] text-[12px] mt-[4px] box-border mb-[24px] font-[500] block font-sf-pro">{subtitle}</p>
+                    </div>
+                </div>
+                <div className="py-[24px] px-[20px] bg-[url('./assets/153391597-dbe0e13e-7ea8-4d7c-9b5c-66d0400df3d3.png')] box-border block font-sf-pro">
+                    <div className="inline-block py-[12px] px-[16px] bg-[#eeeded] shadow-custom-3 rounded-[16px] break-words box-border font-sf-pro">
+                        <h4 className="text-[#808080] font-[600] text-[12px] mb-[8px] box-border leading-[32px] block break-words">{brandName}</h4>
+                        <p className="text-[14px] text-[#1a1a1a] break-words max-w-[270px] box-border mb-[24px] font-[500] block leading-[24px]">{message}</p>
+                    </div>
+                </div>
+                <div className="bg-[#fff] rounded-bl-lg rounded-br-lg p-[20px] flex justify-center box-border font-sf-pro">
+                    <div style={{backgroundColor: btnColor}} className="rounded-[40px] box-border inline-flex py-[10px] px-[55px] shadow-custom-3 tetx-[#fff] items-center cursor-pointer">
+                    <i   
+                        style={{ color: btnColorScheme === "light" ? "#fff" : "#000" }} 
+                        className="fa-brands fa-whatsapp overflow-hidden box-border text-[#fff] text-[27px] font-[500] leading-[24px] inline-block w-[25] h-[25] cursor-pointer"
+                    ></i>
+                    <p style={{ color: btnColorScheme === "light" ? "#fff" : "#000" }} className="text-[#fff] ml-[8px] tetx-[14px] leading-[20px] box-border inline-block  font-[500] ">{text}</p>
+                    </div>
+                </div>
+            </div>
+
+            {/* Chat Box Settings */}
+            <div className="box-border block font-sf-pro text-[#222525] text-[16px] font-[500] leading-[24px]">
+                {/* first row */}
+                <div className="justify-start box-border flex mt-[32px] font-sf-pro">
+                    <div className="mr-[40px] min-w-[200px] flex-col box-border font-sf-pro ">
+                        <label className="mb-[14px] text-[#000] text-[16px] font-sf-pro box-border font-[700] block ">Title (Brand Name)</label>
+                        <input type="text" value={brandName}
+                        onChange={(e) => setBrandName(e.target.value)}
+                        className="font-roboto font-[300] bg-[#fff] border-1 border-[#d9d9d9] h-[32px] py-[1px] px-[12px] text-[14px] box-border inline-block text-start"/>
+                    </div>
+                    <div className="mr-[40px] min-w-[200px] flex-col box-border font-sf-pro ">
+                        <label className="mb-[14px] text-[#000] text-[16px] font-sf-pro box-border font-[700] block ">Subtitle</label>
+                        <input type="text" value={subtitle}
+                        onChange={(e) => setSubtitle(e.target.value)} 
+                        className="font-roboto font-[300] bg-[#fff] border-1 border-[#d9d9d9] w-[320px] h-[32px] py-[1px] px-[12px] text-[14px] box-border inline-block text-start"/>
+                    </div>
+                </div>
+                {/* second row */}
+                <div className="justify-start box-border flex mt-[32px] font-sf-pro">
+                    <div className="mr-[40px] min-w-[200px] flex-col box-border font-sf-pro">
+                        <label className="mb-[14px] text-[#000] text-[15px] font-sf-pro box-border font-[700] block ">Header Background Colour</label>
+                        <div className="min-w-[200px] flex box-border font-sf-pro text-[16px] font-[500] leading-[24px]">
+                            <input 
+                                className="w-[168px] font-roboto font-[300] bg-[#fff] border border-[#d9d9d9] h-[32px] py-[1px] px-[12px] text-[14px] box-border"
+                                type="text" 
+                                value={headercolor}
+                                onChange={(e) => setHeadercolor(e.target.value)}
+                            />
+
+                            {/* Color Picker with real-time change */}
+                            <input 
+                                type="color" 
+                                value={headercolor}
+                                onChange={(e) => setHeadercolor(e.target.value)} 
+                                className="w-[32px] h-[32px] min-h-[32px] font-roboto font-[300] bg-[#fff] border border-[#d9d9d9] cursor-pointer"
+                            />
+                        </div>
+                    </div>
+                    <div className="mr-[40px] min-w-[200px] flex-col box-border font-sf-pro ">
+                        <label className="mb-[14px] text-[#000] text-[15px] font-sf-pro box-border font-[700] block ">Header Text Colour Scheme</label>
+                        <select 
+                            value={colorScheme} 
+                            onChange={(e) => setColorScheme(e.target.value)}
+                            className="box-border w-[168px] font-roboto font-[300] bg-[#fff] border border-[#d9d9d9] h-[32px] py-[1px] px-[12px] text-[14px] inline-block"
+                        >
+                            <option value="dark" className="block font-roboto text-[14px]">Dark</option>
+                            <option value="light" className="block font-roboto text-[14px]">Light</option>
+                        </select>
+                    </div>
+                </div>
+
+                {/* third row */}
+                <div className="box-border flex justify-between mt-[32px] font-sf-pro">
+                    <div className="w-[558px] min-w-[200px] flex-col box-border font-sf-pro space-y-3">
+                        <label className="mb-[14px] text-[#000] text-[16px] font-sf-pro box-border font-[700] block">Brand Logo URL</label>
+                        <p className="font-[Montserrat] font-[400] text-[15px] text-[#828282] leading-[18px] max-w-[100%]">Include a link from a CDN. You can upload it to your CMS and paste that link.</p>
+                        <input type="text" value={url}
+                        onChange={(e) => setUrl(e.target.value)}
+                        className="h-[40px] font-[roboto] font-[300] bg-[#fff] border-1 border-[#d9d9d9] py-[1px] px-[12px] text-[14px] box-border w-[100%]" />
+                    </div>
+                </div>
+
+                {/* fourth row */}
+                <div className=" flex flex-col mt-[32px] text-left text-[#222525] space-y-[14px]">
+                    <label className="mb-[6px] text-[#000] text-[16px] font-sf-pro box-border font-[700] block leading-[24px]">
+                    Greeting Text
+                    </label>
+
+                    <textarea 
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                        className="font-[Montserrat] font-[400] text-[15px] text-[#828282] leading-[18px] border border-[#d9d9d9] 
+                                bg-[#fff] h-[81px] py-[9px] px-[12px] box-border resize w-full min-w-[280px] sm:w-[250px] md:w-[300px] 
+                                lg:w-[350px]"
+                    >
+                    </textarea>
+                </div> 
+
+                {/* fifth row */}
+                <div className="box-border gap-5 flex justify-between mt-[32px] text-[#222525]">
+                    {/* CTA Text */}
+                    <div className="min-w-[200px] flex-col box-border space-y-[14px] mt-4">
+                        <label className="text-[#000] text-[16px] font-sf-pro box-border font-[700] block">CTA Text</label>
+                        <input 
+                            className="w-[168px] font-roboto font-[300] bg-[#fff] border border-[#d9d9d9] h-[32px] py-[1px] px-[12px] text-[14px] box-border" 
+                            type="text" 
+                            value={text}
+                            onChange={(e) => setText(e.target.value)}
+                        />
+                    </div>
+                    {/* Button Color */}
+                    <div className="min-w-[200px] flex-col box-border space-y-[14px] mt-4">
+                        <label className="text-[#000] text-[16px] font-sf-pro box-border font-[700] block">
+                            Button Color
+                        </label>
+                        <div className="min-w-[200px] flex box-border font-sf-pro text-[16px] font-[500] leading-[24px]">
+                            <input 
+                                className="w-[168px] font-roboto font-[300] bg-[#fff] border border-[#d9d9d9] h-[32px] py-[1px] px-[12px] text-[14px] box-border"
+                                type="text" 
+                                value={btnColor}
+                                onChange={(e) => setBtnColor(e.target.value)}
+                            />
+
+                            {/* Color Picker with real-time change */}
+                            <input 
+                                type="color" 
+                                value={btnColor}
+                                onChange={(e)=> setBtnColor(e.target.value)} 
+                                className="w-[32px] h-[32px] min-h-[32px] font-roboto font-[300] bg-[#fff] border border-[#d9d9d9] cursor-pointer"
+                            />
+                        </div>
+                    </div>
+                    {/* Text & Icon Colour Scheme */}
+                    <div className="min-w-[200px] flex-col box-border space-y-[14px] mt-4">
+                        <label className="text-[#000] text-[15px] font-sf-pro box-border font-[700] block">
+                            Text & Icon Colour Scheme
+                        </label>
+                            <select 
+                                value={btnColorScheme}
+                                onChange={(e)=> setBtnColorScheme(e.target.value)}  
+                                className="box-border w-[168px] font-roboto font-[300] bg-[#fff] border border-[#d9d9d9] h-[32px] py-[1px] px-[12px] text-[14px] inline-block"
+                            >
+                                <option value="light" className="block font-roboto text-[14px]">Light</option>
+                                <option value="dark" className="block font-roboto text-[14px]">Dark</option>
+                        </select>
+                    </div>
+                </div>
+
+                {/* sixth row */}
+                <div className="box-border flex justify-between mt-[32px] text-[#222525] gap-5">
+                    {/* corner radius */}
+
+                    <div className="min-w-[200px] flex-col box-border space-y-[14px] mt-4">
+                        <label className="text-[#000] text-[16px] font-sf-pro box-border font-[700] block">
+                            Corner Radius
+                        </label>
+                        <div className="min-w-[200px] flex justify-center items-center box-border font-sf-pro text-[16px] font-[500] leading-[24px]">
+                            <input 
+                                type="number"
+                                value={radius}
+                                onChange={(e)=> setRadius(e.target.value)}
+                                className="w-[168px] font-roboto font-[300] bg-[#fff] border border-[#d9d9d9] h-[32px] py-[1px] px-[12px] text-[14px] box-border"
+                            />
+                            <div className="w-[32px] h-[32px] bg-[#fafafa] text-[#828282] p-[5px] pl-[12px] border-1 border-[#d9d9d9] font-roboto text-[14px] min-h-[32px] box-border font-[500] flex justify-center items-center leading-[24px]">px</div>
+                        </div>
+                    </div>
+                </div>
+                
+                {/*Note*/}
+                <p className="mt-[32px] font-[300] box-border text-[#3f3f3f] mb-[24px] block font-sf-pro "><b>Please note:</b> Your WhatsApp Number & Welcome Message are taken from WhatsApp Chat Button Settings.</p>
+
+                {/* button */}
+                <button 
+                    className="mx-[25px] py-[9px] px-[15px] bg-[#ff0c8b] text-[#fff] font-roboto text-[14px] mt-[32px] border-none shadow-md rounded-[4px] cursor-pointer"
+                    onClick={handleButtonClick}
+                >
+                    Generate WhatsApp Widget + Chat Button Code
+                </button>
+
+                {CodeShow && (
+                    <div className="block mt-[32px] text-[16px] font-[500] leading-[24px] text-left text-[#222525] space-y-[14px] box-border">
+                        <p className="text-[14px] text-[#000] mt-[40px] box-border mb-[24px] font-[500] block leading-[24px]">
+                            "Copy this code and paste before the body tag on every page of your website."
+                        </p>
+                        <code className="block bg-[#fafafa] py-[12px] px-[18px] text-[#1a1a1a] font-[monospace] text-[1em] box-border mt-[16px] rounded-[4px] h-[130px] overflow-y-auto font-[200]">
+                            <span>{`<script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>`}</span><br></br>
+                            {/* <span>{`<script>`}</span>
+                            <span>{`  var wa_btnSetting = {`}</span>
+                            <span>{`    "btnColor":"${buttonColorChange}",`}</span>
+                            <span>{`    "ctaText":"${ctaTextChange}",`}</span><br/>
+                            <span>{`    "cornerRadius":${cornerRadiusChange},`}</span>
+                            <span>{`    "marginBottom":${marginBottomChange},`}</span>
+                            <span>{`    "marginLeft":${marginLeftChange},`}</span>
+                            <span>{`    "marginRight":${marginRightChange},`}</span>
+                            <span>{`    "btnPosition":"right",`}</span>
+                            <span>{`    "whatsAppNumber":"${mobileNumberChange}",`}</span>
+                            <span>{`    "welcomeMessage":${messageChange},`}</span>
+                            <span>{`    "zIndex":${zIndexChange},`}</span>
+                            <span>{`    "btnColorScheme":"${colorSchemeChange}"`}</span> */}
+                            <span>{`  var wa_widgetSetting = {`}</span><br></br>
+                            <span>{`    "title":"${brandNameChange}",`}</span><br></br>
+                            <span>{`    "subtitle":"${subtitleChange}",`}</span><br></br>
+                            <span>{`    "headerBackgroundColor":${headercolorChange},`}</span><br></br>
+                            <span>{`    "headerColorScheme":${colorSchemeChange},`}</span><br></br>
+                            <span>{`    "greetingText":${messageChange},`}</span><br></br>
+                            <span>{`    "ctaText":${textChange},`}</span><br></br>
+                            <span>{`    "btnColor":${btnColorChange},`}</span><br></br>
+                            <span>{`    "cornerRadius":"${radiusChange}",`}</span><br></br>
+                            <span>{`    "welcomeMessage":"Hello",`}</span><br></br>
+                            <span>{`    "btnColorScheme":${btnColorSchemeChange},`}</span><br></br>
+                            <span>{`    "brandImage":"${urlChange},"`}</span><br></br>
+                            <span>{`    "darkHeaderColorScheme":"{"title":"#333333","subTitle":"#4F4F4F"}"`}</span><br></br>
+                            <span>{`  };`}</span>
+                            <span>{`  window.onload = () => {`}</span><br></br>
+                            <span>{` _waEmbed(wa_btnSetting, wa_widgetSetting);`}</span><br></br>
+                            <span>{`  };`}</span><br></br>
+                            <span>{`</script>`}</span><br></br>
+                        </code>
+                        <button className="mt-[16px] w-[165px] h-[32px] bg-[#fff] border-1 border-[#d9d9d9] box-border shadow-2xl rounded-[4px] text-[rgb(0 0 0 / 65%)] font-[roboto] mr-[16px] text-[14px] flex items-center justify-evenly cursor-pointer overflow-visible"
+                        onClick={copyToClipboard}
+                        >
+                            <i className="fa-solid fa-copy overflow-hidden box-border inline-block "></i>
+                            Copy to clipboard
+                        </button>
+                    </div>
+                )}
+            </div>
+        </>
+    )
+}
+
+export default chatBox;
