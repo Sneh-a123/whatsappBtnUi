@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import QRcodeImg from "./assets/qrCOde.png"
+import { QRCodeCanvas } from "qrcode.react";
 
-function whatsappBtn() {
+function whatsappLink() {
     let [count, setCount] = useState(0);
+  
     const [buttonColor, setButtonColor] = useState("#16BE45");
         const [ctaText, setCtaText] = useState("WhatsApp Us");
         const [colorScheme, setColorScheme] = useState("light");
@@ -57,7 +58,22 @@ function whatsappBtn() {
             setError("");
             setShowCode(true);
         };
-    
+        
+        const downloadQRCode = () => {
+            if (!qrRef.current) return error;
+        
+            const canvas = qrRef.current.querySelector("canvas"); // Get the canvas inside QRCodeCanvas
+            if (!canvas) return;
+        
+            const url = canvas.toDataURL("image/png"); // Convert to PNG
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "whatsapp_qr.png"; // File name
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        };
+
         const copyToClipboard = () => {
             const chatLink = `https://wa.me/${mobileNumber}?text=${encodeURIComponent(message)}`;
         
@@ -163,8 +179,8 @@ function whatsappBtn() {
                     <label className="mb-[6px] text-[#000] text-[16px] font-sf-pro box-border font-[700] block leading-[24px]">
                     Your WhatsApp QR Code
                     </label>
-                    <img className="w-[30%]" src={QRcodeImg} alt="" />
-                    <a href={`https://wa.me/${mobileNumber}?text=${encodeURIComponent(message)}`}><button  className="mt-[16px] w-[165px] h-[32px] bg-[#fff] border-1 border-[#d9d9d9] box-border shadow-2xl rounded-[4px] text-[rgb(0 0 0 / 65%)] font-[roboto] mr-[16px] text-[14px] flex items-center justify-evenly cursor-pointer overflow-visible"><i class="fa-solid fa-download"></i> Download QR Code</button></a>
+                    <QRCodeCanvas value={`https://wa.me/${mobileNumber}?text=${encodeURIComponent(message)}`} size={200} />
+                    <button  onClick={downloadQRCode} className="mt-[16px] w-[165px] h-[32px] bg-[#fff] border-1 border-[#d9d9d9] box-border shadow-2xl rounded-[4px] text-[rgb(0 0 0 / 65%)] font-[roboto] mr-[16px] text-[14px] flex items-center justify-evenly cursor-pointer overflow-visible"><i class="fa-solid fa-download"></i> Download QR Code</button>
                     </div> 
 
                     </div>
@@ -179,4 +195,4 @@ function whatsappBtn() {
     );
 }
 
-export default whatsappBtn;
+export default whatsappLink;
