@@ -11,12 +11,12 @@ const BtnAnimation = ({ onSelectAnimate }) => {
         },
       
         { 
-          name: "Glow", 
-          className: "animate-glow", 
-          style: { 
-            boxShadow: "0px 0px 10px 3px #4fa166",
-            transition: "box-shadow 0.3s ease-in-out"
-          } 
+            name: "Glow", 
+            className: "animate-glow", 
+            style: { 
+              animation: "glowAnimation 1.5s infinite alternate",
+              boxShadow: "0px 0px 10px 3px rgba(79, 161, 102, 0.8)",
+            } 
         },
       
         { 
