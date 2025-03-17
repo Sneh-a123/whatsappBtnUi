@@ -34,6 +34,9 @@ export default [
       'roboto': ['Roboto', 'sans-serif'],
       'nunito': ['Nunito', 'sans-serif'],
     },
+    backgroundImage: {
+      'custom-gradient': 'linear-gradient(95deg, #00c9ed 15%, #0175d0 45%, #014cb9 75%, #0135af 100%)',
+    },
     rules: {
       ...js.configs.recommended.rules,
       ...reactHooks.configs.recommended.rules,

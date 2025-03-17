@@ -1,73 +1,109 @@
 import React from "react";
 import WhatsappBtn from "./whatsappBtn";
 import ChatBox from "./chatBox";
+import WhatsappLink from "./whatsappLink";
+import Header from "./header";
+import Footer from "./footer";
 
 function App() {
   return (
     <>
-      {/* Header Section */}
-      <div className="pt-[64px] pb-[32px] box-border text-[#222525] text-[16px] font-medium font-sf-pro">
-        <div className="z-10 w-full max-w-[1248px] mx-auto px-[24px]">
-          <div className="flex flex-col items-center max-w-[720px] mx-auto">
-            <h1 className="opacity-100 font-bold text-[#1a1a1a] text-[3.1em] text-center font-[Nunito, sans-serif]">
+      <Header/>
+
+      {/* Hero Section */}
+      <div className="   pt-16 pb-8 text-[#222525] text-base font-medium font-sf-pro w-full flex justify-center">
+        <div className="w-full max-w-[1248px] mx-auto px-6 flex justify-center">
+          <div className="flex flex-col items-center text-center w-full max-w-[720px]">
+            <h1 className="font-bold text-[#1a1a1a] text-3xl sm:text-4xl lg:text-[3.1em] leading-tight font-[Nunito, sans-serif]">
               Free WhatsApp Chat Button & Widget
             </h1>
-            <p className="mt-4 mb-4 text-[16px] font-normal text-center">
+            <p className="mt-4 mb-4 text-sm sm:text-base lg:text-lg font-normal">
               Create a beautiful WhatsApp Live Chat Widget and add it to your website for free using our simple WhatsApp button generator.
             </p>
           </div>
         </div>
       </div>
 
-      {/* Generate WhatsApp Button */}
-      <div className="pt-[32px] pb-[96px] text-[#222525] font-[DM Sans, sans-serif] text-[16px] font-medium leading-[24px]">
-        <div className="mb-[64px] z-10 w-full max-w-[1248px] mx-auto px-[24px]">
-          <div className="grid gap-5 grid-cols-[1fr_2.2fr] items-start gap-y-4">
-            {/* Left Side (Heading) */}
-            <div className="self-start mt-[40px] w-full max-w-[506px]">
-              <h2 className="font-bold mb-[24px] font-[Nunito, sans-serif] text-[40px] leading-[42px]">
-                Generate WhatsApp Button
-              </h2>
-              <p className="text-left mt-[24px] mb-[24px] font-[Montserrat, sans-serif] text-[18px] font-normal leading-[28px]">
-                Add WhatsApp Chat to the website in just a few steps. Customize the WhatsApp button on the right and click on the "Generate" button to get the code snippet.
-              </p>
-            </div>
 
-            {/* Right Side (Form & UI) */}
-            <div className="w-full max-w-[720px] box-border">
-              <div className="max-w-[857px] w-full py-[32px] px-[60px] bg-white shadow-lg rounded-[8px] font-sf-pro float-right text-[16px] font-medium leading-[24px] text-[#222525]">
-                <WhatsappBtn />
-                
-              </div>
-            </div>
-          </div>
-        </div>
+     {/* Generate WhatsApp Button Section */}
+<div className="text-[#222525] font-[DM Sans, sans-serif] text-base font-medium leading-6">
+  <div className="mb-16 w-full max-w-[1248px] mx-auto px-6">
+    <div className="flex flex-col lg:flex-row gap-6 w-full lg:text-left">
+      
+      {/* Left Side (Heading) */}
+      <div className="mt-10 w-full max-w-[506px] flex flex-col text-center lg:text-start mx-auto">
+        <h2 className="font-bold mb-6 text-2xl sm:text-3xl lg:text-4xl leading-tight">
+          Generate WhatsApp Button
+        </h2>
+        <p className="mt-6 mb-6 text-base sm:text-lg leading-relaxed">
+          Add WhatsApp Chat to the website in just a few steps. Customize the WhatsApp button on the right and click on the "Generate" button to get the code snippet.
+        </p>
       </div>
 
-      {/* Generate WhatsApp Widget */}
-      <div className="pt-[32px] pb-[96px] text-[#222525] font-[DM Sans, sans-serif] text-[16px] font-medium leading-[24px]">
-        <div className="mb-[64px] z-10 w-full max-w-[1248px] mx-auto px-[24px]">
-          <div className="grid gap-5 grid-cols-[1fr_2.2fr] items-start gap-y-4">
+      {/* Right Side (Form & UI) */}
+      <div className="w-full max-w-[720px] flex items-center justify-center mx-auto">
+        <div className="w-full max-w-[857px] py-8 px-6 sm:px-10 bg-white shadow-lg rounded-lg text-base font-medium leading-6">
+          <WhatsappBtn />
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+      {/* Generate WhatsApp Widget Section */}
+      <div className="text-[#222525] font-[DM Sans, sans-serif] text-base font-medium leading-6">
+        <div className="mb-16 w-full max-w-[1248px] mx-auto px-6">
+          <div className="flex flex-col lg:flex-row gap-6 w-full text-center lg:text-left">
             {/* Left Side (Heading) */}
-            <div className="self-start mt-[40px] w-full max-w-[506px]">
-              <h2 className="font-bold mb-[24px] font-[Nunito, sans-serif] text-[40px] leading-[42px]">
-              Generate WhatsApp Widget
+            <div className="mt-10 w-full max-w-[506px] text-center lg:text-start mx-auto">
+              <h2 className="font-bold mb-6 text-2xl sm:text-3xl lg:text-4xl leading-tight">
+                Generate WhatsApp Widget
               </h2>
-              <p className="text-left mt-[24px] mb-[24px] font-[Montserrat, sans-serif] text-[18px] font-normal leading-[28px]">
-              Generate a WhatsApp Widget to add to your website in just a few steps. Customize the widget on the right and click on "Generate" button to get the code snippet.
+              <p className="mt-6 mb-6 text-base sm:text-lg leading-relaxed">
+                Generate a WhatsApp Widget to add to your website in just a few steps. Customize the widget on the right and click on the "Generate" button to get the code snippet.
               </p>
             </div>
 
             {/* Right Side (Form & UI) */}
-            <div className="w-full max-w-[720px] box-border">
-              <div className="max-w-[857px] w-full py-[32px] px-[60px] bg-white shadow-lg rounded-[8px] font-sf-pro float-right text-[16px] font-medium leading-[24px] text-[#222525]">
-                
+            <div className="w-full max-w-[720px] flex justify-center mx-auto">
+              <div className="w-full max-w-[857px] py-8 px-6 sm:px-10 bg-white shadow-lg rounded-lg text-base font-medium leading-6">
                 <ChatBox />
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Generate WhatsApp Button Section */}
+<div className="text-[#222525] font-[DM Sans, sans-serif] text-base font-medium leading-6">
+  <div className="mb-16 w-full max-w-[1248px] mx-auto px-6">
+    <div className="flex flex-col lg:flex-row gap-6 w-full text-center lg:text-left">
+      
+      {/* Left Side (Heading) */}
+      <div className="mt-10 w-full max-w-[506px] flex flex-col text-start mx-auto">
+        <h2 className="font-bold mb-6 text-2xl sm:text-3xl lg:text-4xl leading-tight">
+        WhatsApp Link Creator for shareable wa.me chat links
+        </h2>
+        <p className="mt-6 mb-6 text-base sm:text-lg leading-relaxed">
+       <span className="font-extrabold"> Step 1:</span> Enter your country code without the + symbol, followed by the WhatsApp phone number.<br></br><br></br>
+
+       <span className="font-extrabold"> Step 2:</span> Add a pre-filled message (optional).<br></br><br></br>
+
+Click on "Generate WhatsApp Chat Link" button!
+        </p>
+      </div>
+
+      {/* Right Side (Form & UI) */}
+      <div className="w-full max-w-[720px] flex justify-center mx-auto">
+        <div className="w-full max-w-[857px] py-8 px-6 sm:px-10 bg-white shadow-lg rounded-lg text-base font-medium leading-6">
+          <WhatsappLink />
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+      <Footer/>
     </>
   );
 }

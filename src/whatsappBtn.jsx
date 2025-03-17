@@ -1,31 +1,55 @@
 import React, { useState } from "react";
+import BtnStyle from "./BtnStyle";
+import BtnAnimation from "./BtnAnimation";
+
 
 function whatsappBtn() {
-    const [buttonColor, setButtonColor] = useState("#16BE45");
-        const [ctaText, setCtaText] = useState("WhatsApp Us");
+    let [count, setCount] = useState(0);
+    const [selectedStyle, setSelectedStyle] = useState({
+        name: "WhatsApp with CTA Green",
+      className: "bg-[#16BE45] text-white",
+      text: "WhatsApp",
+      color: "#16BE45",
+      });
+
+      const [selectedAnimate, setSelectedAnimate] = useState({
+            name: "off", 
+            className: "", 
+            style: {}
+      });
+      
+    const [buttonColor, setButtonColor] = useState("");
+        const [ctaText, setCtaText] = useState("");
         const [colorScheme, setColorScheme] = useState("light");
         const [marginBottom, setMarginBottom] = useState("20");
         const [marginLeft, setMarginLeft] = useState("20");
         const [marginRight, setMarginRight] = useState("20");
         const [cornerRadius, setCornerRadius] = useState("40");
         const [zIndex, setZIndex] = useState("999999");
-        const [mobileNumber, setMobileNumber] = useState("911234567890");
+        const [btnPosition , setBtnPosition] = useState("left");
+        const [mobileNumber, setMobileNumber] = useState("");
         const [message , setMessage] = useState("Hello");
-    
-        const [buttonColorChange, setButtonColorChange] = useState(buttonColor);
-        const [ctaTextChange, setCtaTextChange] = useState(ctaText);
+        const [messagrPrint, setMessagePrint] = useState("Your requested changes have been implemented in the code. You can now copy it.");
+
+        const [selectedStyleChange, setSelectedStyleChange] = useState(selectedStyle.text , selectedStyle.color);
+        const [buttonColorChange, setButtonColorChange] = useState(selectedStyle.color);
+        const [ctaTextChange, setCtaTextChange] = useState(ctaText || selectedStyle.text);
         const [colorSchemeChange, setColorSchemeChange] = useState(colorScheme);
         const [marginBottomChange, setMarginBottomChange] = useState(marginBottom);
         const [marginLeftChange, setMarginLeftChange] = useState(marginLeft);
         const [marginRightChange, setMarginRightChange] = useState(marginRight);
         const [cornerRadiusChange, setCornerRadiusChange] = useState(cornerRadius);
         const [zIndexChange, setZIndexChange] = useState(zIndex);
+        const [btnPositionChange, setBtnPositionChange] = useState(btnPosition);
         const [mobileNumberChange, setMobileNumberChange] = useState(mobileNumber);
         const [messageChange, setMessageChange] = useState(message);
+        const [error, setError] = useState("");
         const [showCode, setShowCode] = useState(false); 
-    
+
+
         const handleButtonClick = () => {
-            setButtonColorChange(buttonColor); 
+            setSelectedStyleChange(selectedStyle.text , selectedStyle.color);
+            setButtonColorChange(selectedStyle.color); 
             setCtaTextChange(ctaText);
             setColorSchemeChange(colorScheme);
             setMarginBottomChange(marginBottom);
@@ -33,23 +57,40 @@ function whatsappBtn() {
             setMarginRightChange(marginRight);
             setCornerRadiusChange(cornerRadius);
             setZIndexChange(zIndex);
+            setBtnPositionChange(btnPosition);
             setMobileNumberChange(mobileNumber);
             setMessageChange(message);
-    
+            setCount(count+1);
+            if (!mobileNumber.trim()) {
+                setError("Phone number is required!");
+                return;
+            }
+            if(count>=1){
+                setMessagePrint(`Your changes have been updated again [${count}] times`);
+            }
+            else{
+                setMessagePrint("Your requested changes have been implemented in the code. You can now copy it.")
+            }
+            setError("");
             setShowCode(true);
         };
+
+        // useEffect(() => {
+        //     setButtonColor(selectedStyle.color);
+        // }, [selectedStyle]);
     
-        const copyToClipboard = () => {
+        const copyToClipboardBtn = () => {
             const codeText = `<script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
         <script>
             var wa_btnSetting = {
+                "btnStyle":"${selectedStyleChange}",
                 "btnColor":"${buttonColorChange}",
-                "ctaText":"${ctaTextChange}",
+                "ctaText":"${ctaText || selectedStyle.text}",
                 "cornerRadius":${cornerRadiusChange},
                 "marginBottom":${marginBottomChange},
                 "marginLeft":${marginLeftChange},
                 "marginRight":${marginRightChange},
-                 "btnPosition":"right",
+                "btnPosition":"${btnPositionChange}",
                 "whatsAppNumber":"${mobileNumberChange}",
                 "welcomeMessage":"${messageChange}",
                 "zIndex":${zIndexChange},
@@ -73,9 +114,20 @@ function whatsappBtn() {
                 </h1>
                 
                 <div 
-                    className="border rounded-[40px] box-border inline-flex py-[10px] px-[14px] justify-center items-center cursor-pointer" 
-                    style={{ backgroundColor: buttonColor }}
+                    className="border rounded-[40px] box-border inline-flex py-[10px] px-[14px] justify-center items-center cursor-pointer relative" 
+                    style={{ backgroundColor: selectedStyle.color,
+                        right: btnPosition === "right" ? "-100px" : "auto", 
+                        ...(typeof selectedAnimate.style === "function" 
+                            ? selectedAnimate.style(btnPosition) 
+                            : selectedAnimate.style || {})
+                        }}
+
+                    
                 >
+                    {/* Notification Dot ko dynamically add karna */}
+                        {selectedAnimate.name === "Notification Dot" && (
+                            <span style={selectedAnimate.dotStyle}></span>
+                        )}
                     <i  
                         style={{ color: colorScheme === "light" ? "#fff" : "#000" }} 
                         className="fa-brands fa-whatsapp overflow-hidden box-border text-[#fff] text-[27px] font-[500] leading-[24px]"
@@ -84,42 +136,62 @@ function whatsappBtn() {
                         style={{ color: colorScheme === "light" ? "#fff" : "#000" }}  
                         className="text-[#fff] ml-[8px] text-[17px] leading-[30px] box-border inline-block cursor-pointer font-semibold"
                     >
-                        {ctaText}
+                        {ctaText || selectedStyle.text}
                     </p>
                 </div>
+
+
                 <div className="box-border block font-sf-pro text-left text-[16px] font-[500] leading-[24px] flex-wrap">
 
+                {/* button animation */}
+                <BtnAnimation onSelectAnimate={setSelectedAnimate} />
+
+                {/* button style */}
+                <BtnStyle onSelectStyle={setSelectedStyle} />
+                
+
                 {/* first row */}
-                <div className="box-border gap-5 flex justify-between mt-[32px] text-[#222525]">
+                <div className="box-border gap-5 text-left justify-between mt-[32px] text-[#222525] flex flex-col md:flex-col lg:flex-row">
 
-                    {/* Button Color */}
-                    <div className="min-w-[200px] flex-col box-border space-y-[14px] mt-4">
-                        <label className="text-[#000] text-[16px] font-sf-pro box-border font-[700] block">
-                            Button Color
-                        </label>
-                        <div className="min-w-[200px] flex box-border font-sf-pro text-[16px] font-[500] leading-[24px]">
-                            <input 
-                                className="w-[168px] font-roboto font-[300] bg-[#fff] border border-[#d9d9d9] h-[32px] py-[1px] px-[12px] text-[14px] box-border"
-                                type="text" 
-                                value={buttonColor}
-                                onChange={(e) => setButtonColor(e.target.value)}
-                            />
+                        {/* Button Color */}
+                        <div className="min-w-[200px] flex-col box-border space-y-[14px] mt-4 ">
+                            <label className="text-[#000] text-[16px] font-sf-pro box-border font-[700] block">
+                                Button Color
+                            </label>
+                            <div className="min-w-[200px] flex box-border font-sf-pro text-[16px] font-[500] leading-[24px]">
+                                <input 
+                                    className="lg:w-[168px] font-roboto font-[300] bg-[#fff] border border-[#d9d9d9] h-[32px] py-[1px] px-[12px] text-[14px] box-border w-[100%] "
+                                    type="text" 
+                                    value={selectedStyle.color}
+                                    onChange={(e) =>
+                                        setSelectedStyle((prev) => ({
+                                        ...prev,
+                                        color: e.target.value,
+                                        }))
+                                    }
+                                />
 
-                            {/* Color Picker with real-time change */}
-                            <input 
-                                type="color" 
-                                value={buttonColor} 
-                                onInput={(e) => setButtonColor(e.target.value)}  
-                                className="w-[32px] h-[32px] min-h-[32px] font-roboto font-[300] bg-[#fff] border border-[#d9d9d9] cursor-pointer"
-                            />
+                                {/* Color Picker with real-time change */}
+                                <input 
+                                    type="color" 
+                                    value={selectedStyle.color} 
+                                    onChange={(e) => {
+                                        setSelectedStyle((prev) => ({
+                                        ...prev,
+                                        color: e.target.value,
+                                        }));
+                                        setButtonColor(e.target.value);
+                                    }} 
+                                    className="w-[32px] h-[32px] min-h-[32px] font-roboto font-[300] bg-[#fff] border border-[#d9d9d9] cursor-pointer"
+                                />
+                            </div>
                         </div>
-                    </div>
 
                     {/* CTA Text */}
                     <div className="min-w-[200px] flex-col box-border space-y-[14px] mt-4">
                         <label className="text-[#000] text-[16px] font-sf-pro box-border font-[700] block">CTA Text</label>
                         <input 
-                            className="w-[168px] font-roboto font-[300] bg-[#fff] border border-[#d9d9d9] h-[32px] py-[1px] px-[12px] text-[14px] box-border" 
+                            className="w-[100%] lg:w-[200px] font-roboto font-[300] bg-[#fff] border border-[#d9d9d9] h-[32px] py-[1px] px-[12px] text-[14px] box-border" 
                             type="text" 
                             value={ctaText} 
                             onChange={(e) => setCtaText(e.target.value)}
@@ -134,7 +206,7 @@ function whatsappBtn() {
                             <select 
                                 value={colorScheme} 
                                 onChange={(e) => setColorScheme(e.target.value)} 
-                                className="box-border w-[168px] font-roboto font-[300] bg-[#fff] border border-[#d9d9d9] h-[32px] py-[1px] px-[12px] text-[14px] inline-block"
+                                className="box-border w-[100%] lg:w-[168px] font-roboto font-[300] bg-[#fff] border border-[#d9d9d9] h-[32px] py-[1px] px-[12px] text-[14px] inline-block"
                             >
                                 <option value="light" className="block font-roboto text-[14px]">Light</option>
                                 <option value="dark" className="block font-roboto text-[14px]">Dark</option>
@@ -143,7 +215,7 @@ function whatsappBtn() {
                 </div>
 
                 {/* second row */}
-                <div className="box-border flex justify-between mt-[32px] text-[#222525] gap-5">
+                <div className="box-border gap-5 justify-between mt-[32px] text-[#222525] flex flex-col md:flex-col lg:flex-row">
 
                 {/* margin bottom */}
 
@@ -156,7 +228,7 @@ function whatsappBtn() {
                         type="number"
                         value={marginBottom}
                         onChange={(e) => setMarginBottom(e.target.value)}
-                        className="w-[168px] font-roboto font-[300] bg-[#fff] border border-[#d9d9d9] h-[32px] py-[1px] px-[12px] text-[14px] box-border"
+                        className="w-[100%] lg:w-[200px] font-roboto font-[300] bg-[#fff] border border-[#d9d9d9] h-[32px] py-[1px] px-[12px] text-[14px] box-border"
                     />
                     <div className="w-[32px] h-[32px] bg-[#fafafa] text-[#828282] p-[5px] pl-[12px] border-1 border-[#d9d9d9] font-roboto text-[14px] min-h-[32px] box-border font-[500] flex justify-center items-center leading-[24px]">px</div>
                 </div>
@@ -172,7 +244,7 @@ function whatsappBtn() {
                         type="number"
                         value={marginLeft}
                         onChange={(e) => setMarginLeft(e.target.value)}
-                        className="w-[168px] font-roboto font-[300] bg-[#fff] border border-[#d9d9d9] h-[32px] py-[1px] px-[12px] text-[14px] box-border"
+                        className="w-[100%] lg:w-[200px] font-roboto font-[300] bg-[#fff] border border-[#d9d9d9] h-[32px] py-[1px] px-[12px] text-[14px] box-border"
                     />
                     <div className="w-[32px] h-[32px] bg-[#fafafa] text-[#828282] p-[5px] pl-[12px] border-1 border-[#d9d9d9] font-roboto text-[14px] min-h-[32px] box-border font-[500] flex justify-center items-center leading-[24px]">px</div>
                 </div>
@@ -188,7 +260,7 @@ function whatsappBtn() {
                         type="number"
                         value={marginRight}
                         onChange={(e) => setMarginRight(e.target.value)}
-                        className="w-[168px] font-roboto font-[300] bg-[#fff] border border-[#d9d9d9] h-[32px] py-[1px] px-[12px] text-[14px] box-border"
+                        className="w-[100%] lg:w-[200px] font-roboto font-[300] bg-[#fff] border border-[#d9d9d9] h-[32px] py-[1px] px-[12px] text-[14px] box-border"
                     />
                     <div className="w-[32px] h-[32px] bg-[#fafafa] text-[#828282] p-[5px] pl-[12px] border-1 border-[#d9d9d9] font-roboto text-[14px] min-h-[32px] box-border font-[500] flex justify-center items-center leading-[24px]">px</div>
                 </div>
@@ -199,7 +271,7 @@ function whatsappBtn() {
                 </div>
 
                 {/* second row part */}
-                <div className="box-border flex justify-between mt-[32px] text-[#222525] gap-5">
+                <div className="box-border gap-5 justify-between mt-[32px] text-[#222525] flex flex-col md:flex-col lg:flex-row">
 
                 {/* corner radius */}
 
@@ -212,7 +284,7 @@ function whatsappBtn() {
                             type="number"
                             value={cornerRadius}
                             onChange={(e) => setCornerRadius(e.target.value)}
-                            className="w-[168px] font-roboto font-[300] bg-[#fff] border border-[#d9d9d9] h-[32px] py-[1px] px-[12px] text-[14px] box-border"
+                            className="w-[100%] lg:w-[200px] font-roboto font-[300] bg-[#fff] border border-[#d9d9d9] h-[32px] py-[1px] px-[12px] text-[14px] box-border"
                         />
                         <div className="w-[32px] h-[32px] bg-[#fafafa] text-[#828282] p-[5px] pl-[12px] border-1 border-[#d9d9d9] font-roboto text-[14px] min-h-[32px] box-border font-[500] flex justify-center items-center leading-[24px]">px</div>
                     </div>
@@ -228,7 +300,7 @@ function whatsappBtn() {
                         type="number"
                         value={zIndex}
                         onChange={(e) => setZIndex(e.target.value)}
-                        className="w-[168px] font-roboto font-[300] bg-[#fff] border border-[#d9d9d9] h-[32px] py-[1px] px-[12px] text-[14px] box-border"
+                        className="w-[100%] lg:w-[200px] font-roboto font-[300] bg-[#fff] border border-[#d9d9d9] h-[32px] py-[1px] px-[12px] text-[14px] box-border"
                     />
                     
                 </div>
@@ -243,11 +315,11 @@ function whatsappBtn() {
                     
                     <div className="flex box-border font-sf-pro text-[#222525] text-[16px] font-[500] leading-[24px] justify-around items-center">
                         <div className="mr-[40px] box-border flex justify-center items-center">
-                            <input name="position" value="left" className="font-roboto font-[300] bg-[#fff] border-1 border-[#d9d9d9] h-[32px] px-[1px] py-[12px] text-[14px] box-border" type="radio" />
+                            <input name="position" value="left" className="font-roboto font-[300] bg-[#fff] border-1 border-[#d9d9d9] h-[32px] px-[1px] py-[12px] text-[14px] box-border" type="radio" checked={btnPosition === "left"} onChange={(e)=> setBtnPosition(e.target.value)}/>
                             <span className="ml-[8px] box-border font-roboto font-[300] bg-[#fff] text-[#222525]">Left</span>
                         </div>
                         <div className="mr-[40px] box-border flex justify-center items-center">
-                            <input name="position" value="right" className="font-roboto font-[300] bg-[#fff] border-1 border-[#d9d9d9] h-[32px] px-[1px] py-[12px] text-[14px] box-border" type="radio" />
+                            <input name="position" value="right" className="font-roboto font-[300] bg-[#fff] border-1 border-[#d9d9d9] h-[32px] px-[1px] py-[12px] text-[14px] box-border" type="radio" checked={btnPosition === "right"} onChange={(e)=> setBtnPosition(e.target.value)} />
                             <span className="ml-[8px] box-border font-roboto font-[300] bg-[#fff] text-[#222525]">Right</span>
                         </div>
                     </div>
@@ -269,12 +341,14 @@ function whatsappBtn() {
                     <input 
                         type="number"
                         value={mobileNumber}
+                        placeholder="your mobile number"
                         onChange={(e) => setMobileNumber(e.target.value)}
                         className="w-[168px] font-roboto font-[300] bg-[#fff] border border-[#d9d9d9] h-[32px] py-[1px] px-[12px] text-[14px] box-border"
                     />
 
                     
                 </div>
+                <span>{error && <p className="text-red-500 text-[14px]">{error}</p>}</span>
                 <div className=" flex flex-col mt-[32px] text-left text-[#222525] space-y-[14px]">
                     <label className="mb-[6px] text-[#000] text-[16px] font-sf-pro box-border font-[700] block leading-[24px]">
                         Welcome Message (optional)
@@ -296,7 +370,7 @@ function whatsappBtn() {
 
                 <div className="box-border block font-sf-pro text-left text-[16px] font-[500] leading-[24px] flex-wrap">
                 <button 
-                    className="mx-[25px] py-[9px] px-[15px] bg-[#ff0c8b] text-[#fff] font-roboto text-[14px] mt-[32px] border-none shadow-md rounded-[4px] cursor-pointer"
+                    className="py-[9px] px-[15px] bg-[#16563A] hover:bg-[#54b68b] transition-all text-[#fff] font-roboto text-[14px] mt-[32px] border-none shadow-md rounded-[4px] cursor-pointer"
                     onClick={handleButtonClick}  
                 >
                     Generate WhatsApp Button Code
@@ -305,20 +379,21 @@ function whatsappBtn() {
                 
                 {showCode && (
                     <div className="block mt-[32px] text-[16px] font-[500] leading-[24px] text-left text-[#222525] space-y-[14px] box-border">
-                        <p className="text-[14px] text-[#000] mt-[40px] box-border mb-[24px] font-[500] block leading-[24px]">
-                            "Copy this code and paste before the body tag on every page of your website."
+                        <p className="text-[14px] text-center text-[#d0eed2] mt-[40px] box-border mb-[24px] font-[500] block leading-[24px] bg-gray-600 p-3">
+                            {messagrPrint}
                         </p>
                         <code className="block bg-[#fafafa] py-[12px] px-[18px] text-[#1a1a1a] font-[monospace] text-[1em] box-border mt-[16px] rounded-[4px] h-[130px] overflow-y-auto font-[200]">
                             <span>{`<script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>`}</span><br/>
                             <span>{`<script>`}</span><br/>
                             <span>{`  var wa_btnSetting = {`}</span><br/>
+                            <span>{`"btnStyle":"${selectedStyleChange}",`}</span>
                             <span>{`    "btnColor":"${buttonColorChange}",`}</span><br/>
-                            <span>{`    "ctaText":"${ctaTextChange}",`}</span><br/>
+                            <span>{`    "ctaText":"${ctaText || selectedStyle.text}",`}</span><br/>
                             <span>{`    "cornerRadius":${cornerRadiusChange},`}</span><br/>
                             <span>{`    "marginBottom":${marginBottomChange},`}</span><br/>
                             <span>{`    "marginLeft":${marginLeftChange},`}</span><br/>
                             <span>{`    "marginRight":${marginRightChange},`}</span><br/>
-                            <span>{`    "btnPosition":"right",`}</span><br/>
+                            <span>{`    "btnPosition":${btnPositionChange},`}</span><br/>
                             <span>{`    "whatsAppNumber":"${mobileNumberChange}",`}</span><br/>
                             <span>{`    "welcomeMessage":${messageChange},`}</span><br/>
                             <span>{`    "zIndex":${zIndexChange},`}</span><br/>
@@ -330,7 +405,7 @@ function whatsappBtn() {
                             <span>{`</script>`}</span><br/>
                         </code>
                         <button className="mt-[16px] w-[165px] h-[32px] bg-[#fff] border-1 border-[#d9d9d9] box-border shadow-2xl rounded-[4px] text-[rgb(0 0 0 / 65%)] font-[roboto] mr-[16px] text-[14px] flex items-center justify-evenly cursor-pointer overflow-visible"
-                        onClick={copyToClipboard}
+                        onClick={copyToClipboardBtn}
                         >
                             <i className="fa-solid fa-copy overflow-hidden box-border inline-block "></i>
                             Copy to clipboard
