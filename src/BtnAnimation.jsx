@@ -30,15 +30,15 @@ const BtnAnimation = ({ onSelectAnimate }) => {
       
         { 
           name: "Notification Dot", 
-          className: "relative",
+          className: "notifyDot",
           style: { 
-            position: "relative"
+            position: ""
           }, 
           dotStyle: { 
-            content: "''",
-            position: "absolute",
-            top: "5px",
-            right: "130px",
+            content: "",
+            position: "relative",
+            bottom: "13px",
+            right: "15px",
             width: "10px",
             height: "10px",
             backgroundColor: "red",
@@ -74,7 +74,7 @@ const BtnAnimation = ({ onSelectAnimate }) => {
   return (
     <div className="box-border mt-8 text-[#222525] flex-col space-y-4 md:flex-col lg:flex-row">
       <label className="text-black text-lg font-bold block mb-4">
-        Button Style
+        Button Animation
       </label>
       <div className="min-w-[200px] space-y-0 grid grid-cols-1 md:grid-cols-3 gap-4">
         {Animation.map((option, index) => (

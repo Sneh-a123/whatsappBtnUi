@@ -1,28 +1,75 @@
 @import "tailwindcss";
 
-@keyframes glowAnimation {
-    0% {
-      box-shadow: 0px 0px 5px 2px rgba(79, 161, 102, 0.3);
-    }
-    100% {
-      box-shadow: 0px 0px 15px 5px rgba(79, 161, 102, 0.9);
-    }
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
   }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes glowAnimation {
+  0% {
+    box-shadow: 0px 0px 5px 2px rgba(79, 161, 102, 0.3);
+  }
+  100% {
+    box-shadow: 0px 0px 15px 5px rgba(79, 161, 102, 0.9);
+  }
+}
 
 @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    50% { transform: translateX(5px); }
-    75% { transform: translateX(-3px); }
-  }
-  @keyframes floating {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0); }
-  }
-  
-  @keyframes heartbeat {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
-  }  
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-3px); }
+}
+
+@keyframes floating {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+#wa-btn-wrapper .animate-bounce {
+  animation: bounce 1s infinite !important;
+}
+
+#wa-btn-wrapper .animate-glow {
+  animation: glowAnimation 1.5s infinite alternate !important;
+  box-shadow: 0px 0px 10px 3px rgba(79, 161, 102, 0.8) !important;
+}
+
+#wa-btn-wrapper .animate-shake {
+  animation: shake 0.5s infinite !important;
+  transform-origin: left center right center !important;
+}
+
+#wa-btn-wrapper .notifyDot {
+  position: relative !important;
+}
+
+#wa-btn-wrapper .notifyDot::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 5px !important;
+  right: 13px !important;
+  width: 10px !important;
+  height: 10px !important;
+  background-color: red !important;
+  border-radius: 50% !important;
+}
+
+#wa-btn-wrapper .animate-floating {
+  animation: floating 2s ease-in-out infinite !important;
+}
+
+#wa-btn-wrapper .animate-heartbeat {
+  animation: heartbeat 1.5s infinite ease-in-out !important;
+}

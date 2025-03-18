@@ -13,9 +13,7 @@ function whatsappBtn() {
       });
 
       const [selectedAnimate, setSelectedAnimate] = useState({
-            name: "off", 
-            className: "", 
-            style: {}
+        name: "off", className: "", style: {}
       });
       
     const [buttonColor, setButtonColor] = useState("");
@@ -31,6 +29,7 @@ function whatsappBtn() {
         const [message , setMessage] = useState("Hello");
         const [messagrPrint, setMessagePrint] = useState("Your requested changes have been implemented in the code. You can now copy it.");
 
+        const [selectedAnimateChange, setSelectedAnimateChange] = useState(selectedAnimate.className);
         const [selectedStyleChange, setSelectedStyleChange] = useState(selectedStyle.text , selectedStyle.color);
         const [buttonColorChange, setButtonColorChange] = useState(selectedStyle.color);
         const [ctaTextChange, setCtaTextChange] = useState(ctaText || selectedStyle.text);
@@ -48,6 +47,7 @@ function whatsappBtn() {
 
 
         const handleButtonClick = () => {
+            setSelectedAnimateChange(selectedAnimate.className);
             setSelectedStyleChange(selectedStyle.text , selectedStyle.color);
             setButtonColorChange(selectedStyle.color); 
             setCtaTextChange(ctaText);
@@ -80,7 +80,8 @@ function whatsappBtn() {
         // }, [selectedStyle]);
     
         const copyToClipboardBtn = () => {
-            const codeText = `<script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
+            const codeText = `
+            <script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
         <script>
             var wa_btnSetting = {
                 "btnStyle":"${selectedStyleChange}",
@@ -114,7 +115,8 @@ function whatsappBtn() {
                 </h1>
                 
                 <div 
-                    className="border rounded-[40px] box-border inline-flex py-[10px] px-[14px] justify-center items-center cursor-pointer relative" 
+                    id="wa-btn-wrapper"
+                    className="rounded-[40px] box-border inline-flex px-[15px] py-[13px] justify-center text-center items-center cursor-pointer relative align-middle" 
                     style={{ backgroundColor: selectedStyle.color,
                         right: btnPosition === "right" ? "-100px" : "auto", 
                         ...(typeof selectedAnimate.style === "function" 
@@ -124,13 +126,12 @@ function whatsappBtn() {
 
                     
                 >
-                    {/* Notification Dot ko dynamically add karna */}
                         {selectedAnimate.name === "Notification Dot" && (
                             <span style={selectedAnimate.dotStyle}></span>
                         )}
                     <i  
                         style={{ color: colorScheme === "light" ? "#fff" : "#000" }} 
-                        className="fa-brands fa-whatsapp overflow-hidden box-border text-[#fff] text-[27px] font-[500] leading-[24px]"
+                        className="fa-brands fa-whatsapp overflow-hidden pl-[4px] py-[5px] box-border text-center text-[#fff] text-[27px] font-[500] leading-[24px]"
                     ></i>
                     <p 
                         style={{ color: colorScheme === "light" ? "#fff" : "#000" }}  
@@ -144,7 +145,7 @@ function whatsappBtn() {
                 <div className="box-border block font-sf-pro text-left text-[16px] font-[500] leading-[24px] flex-wrap">
 
                 {/* button animation */}
-                <BtnAnimation onSelectAnimate={setSelectedAnimate} />
+                {/* <BtnAnimation onSelectAnimate={setSelectedAnimate} /> */}
 
                 {/* button style */}
                 <BtnStyle onSelectStyle={setSelectedStyle} />
@@ -387,17 +388,17 @@ function whatsappBtn() {
                             <span>{`<script>`}</span><br/>
                             <span>{`  var wa_btnSetting = {`}</span><br/>
                             <span>{`"btnStyle":"${selectedStyleChange}",`}</span>
-                            <span>{`    "btnColor":"${buttonColorChange}",`}</span><br/>
-                            <span>{`    "ctaText":"${ctaText || selectedStyle.text}",`}</span><br/>
-                            <span>{`    "cornerRadius":${cornerRadiusChange},`}</span><br/>
-                            <span>{`    "marginBottom":${marginBottomChange},`}</span><br/>
-                            <span>{`    "marginLeft":${marginLeftChange},`}</span><br/>
-                            <span>{`    "marginRight":${marginRightChange},`}</span><br/>
-                            <span>{`    "btnPosition":${btnPositionChange},`}</span><br/>
-                            <span>{`    "whatsAppNumber":"${mobileNumberChange}",`}</span><br/>
-                            <span>{`    "welcomeMessage":${messageChange},`}</span><br/>
-                            <span>{`    "zIndex":${zIndexChange},`}</span><br/>
-                            <span>{`    "btnColorScheme":"${colorSchemeChange}"`}</span><br/>
+                            <span>{`    "btnColor":"${buttonColorChange}",`}</span>
+                            <span>{`    "ctaText":"${ctaText || selectedStyle.text}",`}</span>
+                            <span>{`    "cornerRadius":${cornerRadiusChange},`}</span>
+                            <span>{`    "marginBottom":${marginBottomChange},`}</span>
+                            <span>{`    "marginLeft":${marginLeftChange},`}</span>
+                            <span>{`    "marginRight":${marginRightChange},`}</span>
+                            <span>{`    "btnPosition":${btnPositionChange},`}</span>
+                            <span>{`    "whatsAppNumber":"${mobileNumberChange}",`}</span>
+                            <span>{`    "welcomeMessage":${messageChange},`}</span>
+                            <span>{`    "zIndex":${zIndexChange},`}</span>
+                            <span>{`    "btnColorScheme":"${colorSchemeChange}"`}</span>
                             <span>{`  };`}</span><br/>
                             <span>{`  window.onload = () => {`}</span><br/>
                             <span>{`    _waEmbed(wa_btnSetting);`}</span><br/>  

@@ -59,20 +59,7 @@ function whatsappLink() {
             setShowCode(true);
         };
         
-        const downloadQRCode = () => {
-            if (!qrRef.current) return error;
         
-            const canvas = qrRef.current.querySelector("canvas"); // Get the canvas inside QRCodeCanvas
-            if (!canvas) return;
-        
-            const url = canvas.toDataURL("image/png"); // Convert to PNG
-            const a = document.createElement("a");
-            a.href = url;
-            a.download = "whatsapp_qr.png"; // File name
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        };
 
         const copyToClipboard = () => {
             const chatLink = `https://wa.me/${mobileNumber}?text=${encodeURIComponent(message)}`;
@@ -180,7 +167,7 @@ function whatsappLink() {
                     Your WhatsApp QR Code
                     </label>
                     <QRCodeCanvas value={`https://wa.me/${mobileNumber}?text=${encodeURIComponent(message)}`} size={200} />
-                    <button  onClick={downloadQRCode} className="mt-[16px] w-[165px] h-[32px] bg-[#fff] border-1 border-[#d9d9d9] box-border shadow-2xl rounded-[4px] text-[rgb(0 0 0 / 65%)] font-[roboto] mr-[16px] text-[14px] flex items-center justify-evenly cursor-pointer overflow-visible"><i class="fa-solid fa-download"></i> Download QR Code</button>
+                    
                     </div> 
 
                     </div>

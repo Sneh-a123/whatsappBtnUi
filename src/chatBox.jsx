@@ -289,18 +289,18 @@ function chatBox() {
                             <span>{`<script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>`}</span><br></br>
                             <span>{`<script>`}</span><br/>
                             <span>{`  var wa_widgetSetting = {`}</span><br></br>
-                            <span>{`    "title":"${brandNameChange}",`}</span><br></br>
-                            <span>{`    "subTitle":"${subTitleChange}",`}</span><br></br>
-                            <span>{`    "headerBackgroundColor":${headercolorChange},`}</span><br></br>
-                            <span>{`    "headerColorScheme":${colorSchemeChange},`}</span><br></br>
-                            <span>{`    "greetingText":${messageChange},`}</span><br></br>
-                            <span>{`    "ctaText":${textChange},`}</span><br></br>
-                            <span>{`    "btnColor":${btnColorChange},`}</span><br></br>
-                            <span>{`    "cornerRadius":"${radiusChange}",`}</span><br></br>
-                            <span>{`    "welcomeMessage":"Hello",`}</span><br></br>
-                            <span>{`    "btnColorScheme":${btnColorSchemeChange},`}</span><br></br>
-                            <span>{`    "brandImage":"${urlChange},"`}</span><br></br>
-                            <span>{`    "darkHeaderColorScheme":"{"title":"#333333","subTitle":"#4F4F4F"}"`}</span><br></br>
+                            <span>{`    "title":"${brandNameChange}",`}</span>
+                            <span>{`    "subTitle":"${subTitleChange}",`}</span>
+                            <span>{`    "headerBackgroundColor":${headercolorChange},`}</span>
+                            <span>{`    "headerColorScheme":${colorSchemeChange},`}</span>
+                            <span>{`    "greetingText":${messageChange},`}</span>
+                            <span>{`    "ctaText":${textChange},`}</span>
+                            <span>{`    "btnColor":${btnColorChange},`}</span>
+                            <span>{`    "cornerRadius":"${radiusChange}",`}</span>
+                            <span>{`    "welcomeMessage":"Hello",`}</span>
+                            <span>{`    "btnColorScheme":${btnColorSchemeChange},`}</span>
+                            <span>{`    "brandImage":"${urlChange},"`}</span>
+                            <span>{`    "darkHeaderColorScheme":"{"title":"#333333","subTitle":"#4F4F4F"}"`}</span>
                             <span>{`  };`}</span>
                             <span>{`  window.onload = () => {`}</span><br></br>
                             <span>{` _waEmbed(wa_btnSetting, wa_widgetSetting);`}</span><br></br>

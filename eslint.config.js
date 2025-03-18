@@ -16,6 +16,48 @@ export default [
         sourceType: 'module',
       },
     },
+    keyframes: {
+      bounce: {
+        "0%, 100% ":{
+          transform: "translateY(0)"
+        },
+        "50%" :{
+          transform: "translateY(-10px)"
+        }
+      }
+    },
+    keyframes: {
+      glowAnimation: {
+        "0%" : {
+          boxshadow: "0px 0px 5px 2px rgba(79, 161, 102, 0.3)"
+        },
+        "100%" : {
+          boxshadow: "0px 0px 15px 5px rgba(79, 161, 102, 0.9)"
+        }
+      }
+    },
+    keyframes: {
+      shake: {
+        "0%, 100%": { transform: "translateX(0)" },
+        "25%": { transform: "translateX(-5px)" },
+        "50%": { transform: "translateX(5px)" },
+        "75%": { transform: "translateX(-3px)" }
+      }
+    },
+    keyframes: {
+      floating: {
+       " 0%": { transform: "translateY(0)" },
+        "50%": { transform: "translateY(-10px)" },
+        "100%": { transform: "translateY(0)" }
+      }
+    },
+    keyframes: {
+      heartbeat: {
+        "0%": { transform: "scale(1)"},
+        "50%": { transform: "scale(1.2)"},
+        "100%": { transform: "scale(1)"}
+      }
+    },
     plugins: {
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
