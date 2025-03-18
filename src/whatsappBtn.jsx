@@ -116,7 +116,7 @@ function whatsappBtn() {
                 
                 <div 
                     id="wa-btn-wrapper"
-                    className="rounded-[40px] box-border inline-flex px-[15px] py-[13px] justify-center text-center items-center cursor-pointer relative align-middle" 
+                    className="rounded-[40px] box-border inline-flex p-[15px] justify-center text-center items-center cursor-pointer relative align-middle" 
                     style={{ backgroundColor: selectedStyle.color,
                         right: btnPosition === "right" ? "-100px" : "auto", 
                         ...(typeof selectedAnimate.style === "function" 
@@ -131,7 +131,7 @@ function whatsappBtn() {
                         )}
                     <i  
                         style={{ color: colorScheme === "light" ? "#fff" : "#000" }} 
-                        className="fa-brands fa-whatsapp overflow-hidden pl-[4px] py-[5px] box-border text-center text-[#fff] text-[27px] font-[500] leading-[24px]"
+                        className="fa-brands fa-whatsapp overflow-hidden pl-[7px] py-[5px] box-border text-center text-[#fff] text-[27px] font-[500] leading-[24px]"
                     ></i>
                     <p 
                         style={{ color: colorScheme === "light" ? "#fff" : "#000" }}  
