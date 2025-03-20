@@ -81,7 +81,7 @@ function App() {
       
       {/* Left Side (Heading) */}
       <div className="mt-10 w-full max-w-[506px] flex flex-col text-start mx-auto">
-        <h2 className="font-bold mb-6 text-2xl sm:text-3xl lg:text-4xl leading-tight">
+        <h2 className="text-center md:text-left font-bold mb-6 text-2xl sm:text-3xl lg:text-4xl leading-tight">
         WhatsApp Link Creator for shareable wa.me chat links
         </h2>
         <p className="mt-6 mb-6 text-base sm:text-lg leading-relaxed">

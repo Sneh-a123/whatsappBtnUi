@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { QRCodeCanvas } from "qrcode.react";
+import html2canvas from "html2canvas";
+
 
 function whatsappLink() {
     let [count, setCount] = useState(0);
@@ -30,7 +32,10 @@ function whatsappLink() {
         const [messageChange, setMessageChange] = useState(message);
         const [error, setError] = useState("");
         const [showCode, setShowCode] = useState(false); 
-    
+
+        const qrRef = useRef(null);
+
+
         const handleButtonClick = () => {
             setButtonColorChange(buttonColor); 
             setCtaTextChange(ctaText);
@@ -59,7 +64,17 @@ function whatsappLink() {
             setShowCode(true);
         };
         
-        
+        const downloadQRCode = () => {
+            if (qrRef.current) {
+                html2canvas(qrRef.current).then((canvas) => {
+                    const link = document.createElement("a");
+                    link.href = canvas.toDataURL("image/png");
+                    link.download = "qrcode.png";
+                    link.click();
+                });
+            }
+        };
+    
 
         const copyToClipboard = () => {
             const chatLink = `https://wa.me/${mobileNumber}?text=${encodeURIComponent(message)}`;
@@ -158,7 +173,7 @@ function whatsappLink() {
                             Copy to clipboard
                         </button>
                         <button className="mt-[16px] w-[165px] h-[32px] bg-[#16563A] border-1 border-[#d9d9d9] box-border shadow-2xl rounded-[4px] text-[#fff] font-[roboto] mr-[16px] text-[14px] flex items-center justify-evenly cursor-pointer overflow-visible" onClick={() => window.open(`https://wa.me/${mobileNumber}?text=${encodeURIComponent(message)}`, "_blank")}>
-                        <i class="fa-brands fa-whatsapp"></i>
+                        <i className="fa-brands fa-whatsapp"></i>
                             Open to Whatsapp</button> 
                         </div>
 
@@ -166,8 +181,12 @@ function whatsappLink() {
                     <label className="mb-[6px] text-[#000] text-[16px] font-sf-pro box-border font-[700] block leading-[24px]">
                     Your WhatsApp QR Code
                     </label>
-                    <QRCodeCanvas value={`https://wa.me/${mobileNumber}?text=${encodeURIComponent(message)}`} size={200} />
-                    
+                    <div ref={qrRef}>
+                                <QRCodeCanvas value={`https://wa.me/${mobileNumber}?text=${encodeURIComponent(message)}`} size={200} />
+                    </div>
+                            <button onClick={downloadQRCode} className="bg-[#16563A] text-white p-2 mt-4">
+                                Download QR Code
+                            </button>
                     </div> 
 
                     </div>

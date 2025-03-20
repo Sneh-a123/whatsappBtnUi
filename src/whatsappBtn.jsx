@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import BtnStyle from "./BtnStyle";
 import BtnAnimation from "./BtnAnimation";
+import "./index.css"
 
 
 function whatsappBtn() {
@@ -84,6 +85,7 @@ function whatsappBtn() {
             <script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
         <script>
             var wa_btnSetting = {
+            "BtnAnimation":"${selectedAnimateChange}",
                 "btnStyle":"${selectedStyleChange}",
                 "btnColor":"${buttonColorChange}",
                 "ctaText":"${ctaText || selectedStyle.text}",
@@ -145,7 +147,7 @@ function whatsappBtn() {
                 <div className="box-border block font-sf-pro text-left text-[16px] font-[500] leading-[24px] flex-wrap">
 
                 {/* button animation */}
-                {/* <BtnAnimation onSelectAnimate={setSelectedAnimate} /> */}
+                <BtnAnimation onSelectAnimate={setSelectedAnimate} />
 
                 {/* button style */}
                 <BtnStyle onSelectStyle={setSelectedStyle} />
@@ -387,6 +389,7 @@ function whatsappBtn() {
                             <span>{`<script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>`}</span><br/>
                             <span>{`<script>`}</span><br/>
                             <span>{`  var wa_btnSetting = {`}</span><br/>
+                            <span>{`"BtnAnimation":"${selectedAnimateChange}",`}</span>
                             <span>{`"btnStyle":"${selectedStyleChange}",`}</span>
                             <span>{`    "btnColor":"${buttonColorChange}",`}</span>
                             <span>{`    "ctaText":"${ctaText || selectedStyle.text}",`}</span>
@@ -422,3 +425,4 @@ function whatsappBtn() {
 }
 
 export default whatsappBtn;
+
