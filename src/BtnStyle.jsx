@@ -5,13 +5,13 @@ const ButtonStyle = ({ onSelectStyle }) => {
     {
       name: "WhatsApp with CTA Green",
       className: "bg-[#16BE45] text-white",
-      text: "WhatsApp",
+      text: "WhatsApp Us",
       color: "#16BE45",
     },
     {
       name: "WhatsApp with CTA Black",
       className: "bg-[#000] text-white",
-      text: "WhatsApp",
+      text: "WhatsApp Us",
       color: "#000",
     },
     {
@@ -28,7 +28,6 @@ const ButtonStyle = ({ onSelectStyle }) => {
     },
   ];
 
-  
   const [selectedStyle, setSelectedStyle] = useState(styles[0]);
 
   const handleSelection = (option) => {
@@ -43,19 +42,28 @@ const ButtonStyle = ({ onSelectStyle }) => {
       </label>
       <div className="min-w-[200px] flex flex-col space-y-4 md:space-y-0 md:grid md:grid-cols-2 md:gap-4">
         {styles.map((option, index) => (
-          <div key={index} className="flex items-center bg-gray-200 py-3 px-5 rounded-full">
+          <label
+            key={index}
+            className="flex items-center bg-gray-200 py-3 px-5 rounded-full cursor-pointer hover:bg-gray-300"
+            onClick={() => handleSelection(option)} // ✅ पूरा Box क्लिकेबल होगा
+          >
             <input
               name="select"
-              value={option.name} pass kiya
+              value={option.name}
               checked={selectedStyle.name === option.name} 
               onChange={() => handleSelection(option)} 
-              className="font-roboto font-light bg-white border border-gray-300 h-4 w-4 cursor-pointer"
+              className="hidden"
               type="radio"
             />
+            <div className="w-4 h-4 border-2 border-gray-400 rounded-full flex items-center justify-center">
+              {selectedStyle.name === option.name && (
+                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              )}
+            </div>
             <span className="ml-2 font-roboto font-semibold text-[#222525]">
               {option.name}
             </span>
-          </div>
+          </label>
         ))}
       </div>
     </div>

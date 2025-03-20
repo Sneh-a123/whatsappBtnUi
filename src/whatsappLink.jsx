@@ -128,7 +128,7 @@ function whatsappLink() {
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                         className="font-[Montserrat] font-[400] text-[15px] text-[#828282] leading-[18px] border border-[#d9d9d9] 
-                                bg-[#fff] h-[81px] py-[9px] px-[12px] box-border resize w-full min-w-[280px] sm:w-[250px] md:w-[300px] 
+                                bg-[#fff] h-[81px] py-[9px] px-[12px] box-border w-full min-w-[280px] sm:w-[250px] md:w-[300px] 
                                 lg:w-[350px]"
                     >
                     </textarea>

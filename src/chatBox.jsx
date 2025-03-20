@@ -53,7 +53,7 @@ function chatBox() {
     }
 
     const copyToClipboard = () => {
-        const codeText = `<script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
+        const codeText = `<script async src='https://nayavision.com/wappi-assets/wappi.js'></script>
     <script>
        
         var wa_widgetSetting = {
@@ -193,7 +193,7 @@ function chatBox() {
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                         className="font-[Montserrat] font-[400] text-[15px] text-[#828282] leading-[18px] border border-[#d9d9d9] 
-                                bg-[#fff] h-[81px] py-[9px] px-[12px] box-border resize w-full min-w-[280px] sm:w-[250px] md:w-[300px] 
+                                bg-[#fff] h-[81px] py-[9px] px-[12px] box-border w-full min-w-[280px] sm:w-[250px] md:w-[300px] 
                                 lg:w-[350px]"
                     >
                     </textarea>
@@ -286,7 +286,7 @@ function chatBox() {
                             {messagrPrint}
                         </p>
                         <code className="block bg-[#fafafa] py-[12px] px-[18px] text-[#1a1a1a] font-[monospace] text-[1em] box-border mt-[16px] rounded-[4px] h-[130px] overflow-y-auto font-[200]">
-                            <span>{`<script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>`}</span><br></br>
+                            <span>{`<script async src='https://nayavision.com/wappi-assets/wappi.js'></script>`}</span><br></br>
                             <span>{`<script>`}</span><br/>
                             <span>{`  var wa_widgetSetting = {`}</span><br></br>
                             <span>{`    "title":"${brandNameChange}",`}</span>

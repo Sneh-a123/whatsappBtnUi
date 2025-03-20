@@ -1,69 +1,66 @@
 import { useState } from "react";
 
 const BtnAnimation = ({ onSelectAnimate }) => {
-    const Animation = [
-        { name: "off", className: "", style: {} },
-      
-        { 
-          name: "Bounce", 
-          className: "animate-bounce", 
-          style: { animation: "bounce 1s infinite" } 
-        },
-      
-        { 
-            name: "Glow", 
-            className: "animate-glow", 
-            style: { 
-              animation: "glowAnimation 1.5s infinite alternate",
-              boxShadow: "0px 0px 10px 3px rgba(79, 161, 102, 0.8)",
-            } 
-        },
-      
-        { 
-          name: "Shake", 
-          className: "animate-shake", 
-          style: { 
-            animation: "shake 0.5s infinite", 
-            transformOrigin: "left center right center" 
-          } 
-        },
-      
-        { 
-          name: "Notification Dot", 
-          className: "notifyDot",
-          style: { 
-            position: ""
-          }, 
-          dotStyle: { 
-            content: "",
-            position: "relative",
-            bottom: "13px",
-            right: "15px",
-            width: "10px",
-            height: "10px",
-            backgroundColor: "red",
-            borderRadius: "50%"
-          } 
-        },
-      
-        { 
-          name: "Floating", 
-          className: "animate-floating", 
-          style: { 
-            animation: "floating 2s ease-in-out infinite" 
-          } 
-        },
-      
-        { 
-          name: "Heart Beat", 
-          className: "animate-heartbeat", 
-          style: { 
-            animation: "heartbeat 1.5s infinite ease-in-out" 
-          } 
-        }
-      ];
+  const Animation = [
+    { name: "off", className: "", style: {} },
 
-  
+    { 
+      name: "Bounce", 
+      className: "bounce", 
+      style: { animation: "bounce 1s infinite" } 
+    },
+
+    { 
+      name: "Glow", 
+      className: "glow", 
+      style: { 
+        animation: "glowAnimation 1.5s infinite alternate",
+        boxShadow: "0px 0px 10px 3px rgba(79, 161, 102, 0.8)",
+      } 
+    },
+
+    { 
+      name: "Shake", 
+      className: "shake", 
+      style: { 
+        animation: "shake 0.5s infinite", 
+        transformOrigin: "left center right center" 
+      } 
+    },
+
+    { 
+      name: "Notification Dot", 
+      className: "notify-dot",
+      style: {}, 
+      dotStyle: { 
+        content: "",
+        position: "relative",
+        bottom: "13px",
+        right: "15px",
+        width: "10px",
+        height: "10px",
+        backgroundColor: "red",
+        borderRadius: "50%"
+      } 
+    },
+
+    { 
+      name: "Floating", 
+      className: "floating", 
+      style: { 
+        animation: "floating 2s ease-in-out infinite" 
+      } 
+    },
+
+    { 
+      name: "Heart Beat", 
+      className: "heartbeat", 
+      style: { 
+        animation: "heartbeat 1.5s infinite ease-in-out" 
+      } 
+    }
+  ];
+
   const [selectedAnimate, setSelectedAnimate] = useState(Animation[0]);
 
   const handleSelection = (option) => {
@@ -78,19 +75,28 @@ const BtnAnimation = ({ onSelectAnimate }) => {
       </label>
       <div className="min-w-[200px] space-y-0 grid grid-cols-1 md:grid-cols-3 gap-4">
         {Animation.map((option, index) => (
-          <div key={index} className="flex items-center bg-gray-200 py-3 px-5 rounded-full">
+          <label 
+            key={index} 
+            className="flex items-center bg-gray-200 py-3 px-5 rounded-full cursor-pointer hover:bg-gray-300"
+            onClick={() => handleSelection(option)} // 🔥 अब पूरे box पर क्लिक से select होगा
+          >
             <input
               name="animate"
-              value={option.name} pass kiya
+              value={option.name}
               checked={selectedAnimate.name === option.name} 
               onChange={() => handleSelection(option)} 
-              className="font-roboto font-light bg-white border border-gray-300 h-4 w-4 cursor-pointer"
+              className="hidden" 
               type="radio"
             />
+            <div className="w-4 h-4 border-2 border-gray-400 rounded-full flex items-center justify-center">
+              {selectedAnimate.name === option.name && (
+                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              )}
+            </div>
             <span className="ml-2 font-roboto font-semibold text-[#222525]">
               {option.name}
             </span>
-          </div>
+          </label>
         ))}
       </div>
     </div>

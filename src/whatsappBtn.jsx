@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import BtnStyle from "./BtnStyle";
 import BtnAnimation from "./BtnAnimation";
-import "./index.css"
 
 
 function whatsappBtn() {
@@ -9,7 +8,7 @@ function whatsappBtn() {
     const [selectedStyle, setSelectedStyle] = useState({
         name: "WhatsApp with CTA Green",
       className: "bg-[#16BE45] text-white",
-      text: "WhatsApp",
+      text: "WhatsApp Us",
       color: "#16BE45",
       });
 
@@ -82,7 +81,7 @@ function whatsappBtn() {
     
         const copyToClipboardBtn = () => {
             const codeText = `
-            <script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
+            <script async src='https://nayavision.com/wappi-assets/wappi.js'></script>
         <script>
             var wa_btnSetting = {
             "BtnAnimation":"${selectedAnimateChange}",
@@ -101,6 +100,16 @@ function whatsappBtn() {
             };
             window.onload = () => {
                 _waEmbed(wa_btnSetting);
+                let observer = new MutationObserver((mutations, obs) => {
+            let btnWrapper = document.querySelector("#wa_btn-content");
+            if (btnWrapper) {
+                console.log("WhatsApp button detected! Adding class...");
+                btnWrapper.classList.add("${selectedAnimateChange}");
+                obs.disconnect(); // Milne ke baad observer ko stop kar do
+            }
+        });
+    
+        observer.observe(document.body, { childList: true, subtree: true });
             };
         </script>`;
         
@@ -365,7 +374,7 @@ function whatsappBtn() {
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                         className="font-[Montserrat] font-[400] text-[15px] text-[#828282] leading-[18px] border border-[#d9d9d9] 
-                                bg-[#fff] h-[81px] py-[9px] px-[12px] box-border resize w-full min-w-[280px] sm:w-[250px] md:w-[300px] 
+                                bg-[#fff] h-[81px] py-[9px] px-[12px] box-border w-full min-w-[280px] sm:w-[250px] md:w-[300px] 
                                 lg:w-[350px]"
                     >
                     </textarea>
@@ -386,10 +395,10 @@ function whatsappBtn() {
                             {messagrPrint}
                         </p>
                         <code className="block bg-[#fafafa] py-[12px] px-[18px] text-[#1a1a1a] font-[monospace] text-[1em] box-border mt-[16px] rounded-[4px] h-[130px] overflow-y-auto font-[200]">
-                            <span>{`<script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>`}</span><br/>
+                            <span>{`<script async src='https://nayavision.com/wappi-assets/wappi.js'></script>`}</span><br/>
                             <span>{`<script>`}</span><br/>
                             <span>{`  var wa_btnSetting = {`}</span><br/>
-                            <span>{`"BtnAnimation":"${selectedAnimateChange}",`}</span>
+                            <span>{`"BtnAnimation":"${selectedAnimateChange}"`}</span>
                             <span>{`"btnStyle":"${selectedStyleChange}",`}</span>
                             <span>{`    "btnColor":"${buttonColorChange}",`}</span>
                             <span>{`    "ctaText":"${ctaText || selectedStyle.text}",`}</span>
@@ -405,6 +414,16 @@ function whatsappBtn() {
                             <span>{`  };`}</span><br/>
                             <span>{`  window.onload = () => {`}</span><br/>
                             <span>{`    _waEmbed(wa_btnSetting);`}</span><br/>  
+                            <span>{`let observer = new MutationObserver((mutations, obs) => {
+            let btnWrapper = document.querySelector("#wa_btn-content");
+            if (btnWrapper) {
+                console.log("WhatsApp button detected! Adding class...");
+                btnWrapper.classList.add("${selectedAnimateChange}");
+                obs.disconnect(); // Milne ke baad observer ko stop kar do
+            }
+        });
+    
+        observer.observe(document.body, { childList: true, subtree: true });`}</span>
                             <span>{`  };`}</span><br/>
                             <span>{`</script>`}</span><br/>
                         </code>
